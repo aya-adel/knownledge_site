@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="wrap">
+    <!---start-content---->
+    <div class="content">
+        <div class="details">
+            <h2> UNDER THE COURSE TITLE :  <%= @lecture.course.title %> &nbsp;<span> Created by : <%= @lecture.user.name %></span></h2>
+            <div class="det-pic">
+                <img src=" <%= @lecture.image %>" alt="">		
+            </div>
+            <div class="det-para">
+                <p class="top">
+                <p>
+                    <strong>Content:</strong>
+                    <%= raw  @lecture.content %>
+
+                <p>   <%= @lecture.attach %></p>
+                </p>
+
+                </p>
+
+            </div>
+        </div>
+
+
+
+        <div class="text-align:center;">
+            <%= link_to like_lecture_path(@lecture), class:"like" , method: :put do %>
+                <button type="button" clas="btn btn-info" aria-label="Left Align">
+
+                    <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center " aria-hidden="true"> </span>
+                    <span class="bage"><%= @lecture.get_upvotes.size %></span>
+                </button>
+
+              <% end  %>     
+
+
+              <%= link_to unlike_lecture_path(@lecture), class:"like" , method: :put do %>
+                  <button type="button" clas="btn btn-info" aria-label="Left Align">
+
+                      <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center " aria-hidden="true"> </span>
+                      <span class="bage"><%= @lecture.get_downvotes.size %></span>
+                  </button>
+
+           
+            
+            
+            
+            
+            
+                <% end  %>   
+
+            </div>
+
+
+            <h4> the comments </h4>
+            <div id="comments">
+                <%= render :partial => @lecture.comments %>
+            </div>
+            <%= simple_form_for [@lecture ,Comment.new] do |f| %>
+              <p>
+
+                  <%= f.input :body , :lable => "NEW COMMENT" , as: :text , input_html: { row:"3" } %>
+              </p>
+              <div class="btn">
+                  <%= f.submit "Add Comment " , class:'btn btn-primary'  %>
+                </div>
+              <% end %>
+
+
+
+
+
+
+
+
+
+          </div>
+          <!---End-content---->
+          <div class="clear"> </div>
+
+
+          <% if current_user.id ==  @lecture.user_id %> 
+            <%= link_to 'Edit', edit_lecture_path(@lecture),class:"btn btn-primary" %> |
+              <%= link_to 'Destroy', @lecture, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-primary" %>
+              <% end %>
+             
+            <a href="/courses/<%= @lecture.course_id %>" class="btn btn-primary"> back</a>
+
+                <a class="btn btn-primary" href="<%= @lecture.attach_url %>" download>Download Attachment</a>
+              </div>
+
+

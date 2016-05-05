@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+
+
+
+  <table>
+
+
+      <tbody>
+          <% @courses.each do |course| %>
+
+
+
+
+        <div class="wrap">
+            <!---start-content---->
+            <div class="content">
+                <div class="services">
+                    <h5><%= course.title %></h5>
+                    <div class="section group">
+                        <div class="listview_1_of_2 images_1_of_2">
+                            <div class="listimg listimg_2_of_1">
+                                <img src="<%= course.image %>">
+                            </div>
+                            <div class="text list_2_of_1">
+                                <h3><%= course.title %></h3>
+                                <p><%= course.user.name %>.</p>
+                                <div class="btn">
+                                    <span class="button-wrap"><a href="/courses/<%= course.id %>" class="button button-pill ">Read Me</a></span>
+                                </div>
+                            </div>
+                        </div>			
+
+
+
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!---End-content---->
+            <div class="clear"> </div>
+        </div>
+
+      <% end %>
+  </tbody>
+  </table>
+
+  <br>
+
+
+
+<% if  current_user.role == "instractor"  %>
+  <%= link_to 'New Course', new_course_path ,class:"btn btn-primary" , data: {no_turbolink: true}%>
+  <%  end %>

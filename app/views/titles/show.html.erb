@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>String:</strong>
+  <%= @title.string %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @title.user %>
+</p>
+
+<%= link_to 'Edit', edit_title_path(@title) %> |
+<%= link_to 'Back', titles_path %>
